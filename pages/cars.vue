@@ -32,7 +32,6 @@ export default {
   async mounted() {
     const data = await this.CarsData
     this.Cars = data.data
-    console.log(this.Cars)
   },
 }
 </script>

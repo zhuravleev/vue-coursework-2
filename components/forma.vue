@@ -25,13 +25,14 @@
 </template>
 
 <script>
+import {mapActions} from "vuex"
 export default {
   name: 'CarForm',
   data() {
     return {
       valid: true,
-      Model: "",
-      Number: "", 
+      model: "",
+      number: "", 
       ModelError: false,
       NumberError: false,  
       NumberRules: [
@@ -44,12 +45,15 @@ export default {
       }
   },
   methods: {
+    ...mapActions({newCar:"main/newCar", refetchCars:"main/refetchCars"}),
     validate () {
         this.$refs.form.validate()
     },
-    send(){
-    //   const numberMask = "/^[A-Z]{1}[0-9]{3}[A-Z]{2}[0-9]{2}$/gm"
-      this.NumberError = !this.Number.match(/^[A-Z]{1}[0-9]{3}[A-Z]{2}[0-9]{2,3}$/gm)
+    async send(){
+      const response = await this.newCar({model: this.model, number: this.number})
+      if (response.status < 300){
+        document.location.reload()
+      }
     }
   },
 }
