@@ -1,7 +1,15 @@
 <template>
   <div>
+    <v-checkbox v-model="Done" :label="`Показать на странице только завершенные: ${Done.toString()}`"></v-checkbox>
     <div class="orders">
-      <div class="order" v-for="(Order,id) in Orders?.results" v-bind:key="id">
+      <div class="order" v-for="(Order,id) in Orders?.results.filter(el=>{
+        if (Done){
+          return el?.status === 'DONE'
+        }
+        else{
+          return true
+        }
+        })" v-bind:key="id">
         <h3>Id заказа: {{ Order?.id }}</h3>
         <h4>Id юзера: {{ Order?.user_info?.id }}</h4>
         <h4>Имя юзера: {{ Order?.user_info?.first_name }}</h4>
@@ -10,6 +18,7 @@
         <h4>Id авто: {{ Order?.car_info?.id }}</h4>
         <h4>Модель авто: {{ Order?.car_info?.model }}</h4>
         <h4>Гос номер авто: {{ Order?.car_info?.number }}</h4>
+        <h4>Статус заказа: {{ Order?.status }}</h4>
       </div>
     </div>
     <v-btn v-if="Orders?.previous" @click="getPaginatedOrders(Orders?.previous)">Previous</v-btn>
@@ -25,6 +34,7 @@ export default {
   data() {
     return {
       Orders: null,
+      Done: false, 
       }
    },
   computed: {

@@ -86,6 +86,11 @@ export default {
           title: 'Orders',
           to: '/orders',
         },
+        {
+          icon: 'mdi-taxi',
+          title: 'Cars',
+          to: '/cars',
+        },
       ],
       miniVariant: false,
       right: true,

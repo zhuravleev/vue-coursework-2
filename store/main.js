@@ -8,4 +8,7 @@ export const getters = {
   getDrivers: async () => {
     return await axios.get(`${HOST}/driver`)
   },
+  getCars: async () => {
+    return await axios.get(`${HOST}/car`)
+  },
 }
