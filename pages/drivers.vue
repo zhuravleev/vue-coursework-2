@@ -2,14 +2,14 @@
   <div>
     <v-btn v-on:click="changeSort">Сменить сортировку</v-btn>
     <div class="drivers">
-      <div class="driver" v-for="(Driver, id) in Drivers?.results?.sort((a, b)=>{
+      <div class="driver" v-for="Driver in Drivers?.results?.sort((a, b)=>{
         if (Sort) {
            return a.last_name.localeCompare(b.last_name)
         }
         else{
             return -1
         }
-        })" v-bind:key="id">
+        })" v-bind:key="Driver.id">
         <h3>Id водителя: {{ Driver?.id }}</h3>
         <h4>Имя: {{ Driver?.first_name }}</h4>
         <h4>Фамилия: {{ Driver?.last_name }}</h4>
@@ -36,12 +36,10 @@ export default {
   async mounted() {
     const data = await this.DriversData
     this.Drivers = data.data
-    console.log(this.Drivers)
   },
   methods: {
     changeSort(){
         this.Sort = !this.Sort
-        console.log(this.Sort)
     },
   }
 }
