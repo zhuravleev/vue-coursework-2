@@ -2,7 +2,14 @@
   <div>
     <v-btn v-on:click="changeSort">Сменить сортировку</v-btn>
     <div class="drivers">
-      <div class="driver" v-for="(Driver, id) in Drivers?.results" v-bind:key="id">
+        <div class="driver" v-for="(Driver, id) in [...Drivers?.results]?.sort((a, b)=>{
+            if (Sort) {
+              return a.last_name.localeCompare(b.last_name)
+            }
+            else{
+                return -1
+            }
+           })" v-bind:key="id">
         <h3>Id водителя: {{ Driver?.id }}</h3>
         <h4>Имя: {{ Driver?.first_name }}</h4>
         <h4>Фамилия: {{ Driver?.last_name }}</h4>
@@ -18,7 +25,7 @@ export default {
   data() {
     return {
       Drivers: null,
-      Sort: false, 
+      Sort: true, 
       }
    },
   computed: {
