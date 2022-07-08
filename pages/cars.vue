@@ -41,7 +41,7 @@ export default {
     color: black;
     background-color: white;  
     border: 1px;
-    width: 200px;
+    width: 250px;
     height: 120px; 
     padding: 20px;
     margin: 10px; 
