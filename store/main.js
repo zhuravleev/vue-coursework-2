@@ -1,6 +1,5 @@
 import axios from 'axios'
 const HOST = 'http://django-web.std-1367.ist.mospolytech.ru/api'
-export const state = () => ({cars: []})
 
 
 export const getters = {
